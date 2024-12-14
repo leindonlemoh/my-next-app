@@ -63,10 +63,15 @@ const urlParams = new URLSearchParams(window.location.search);
   return (
     <div className="border-2 w-full m-2 p-2 flex justify-center rounded-lg">
  
-      {isLoading ? <Laoding bg={'#91cb3e'}
+      {isLoading ? 
+      <div className='w-full h-[90vh]'>
+      <Laoding bg={'white'}
     color ={'#322a57'}
-    width={'16'}
-height={'16'}/>:  <div className="w-full overflow-x-auto rounded-lg">
+    width={'160px'}
+    height={'160px'}/>
+    </div>
+
+:  <div className="w-full overflow-x-auto rounded-lg">
           <table className="table-auto w-full">
             <thead className="border-2 rounded-lg bg-[#03045e]">
               <tr>

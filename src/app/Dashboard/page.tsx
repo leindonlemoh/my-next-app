@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Graph from '../components/Graph'
 import axiosInstance from '@/lib/axiosInstance'
+import Laoding from '../components/Laoding'
 
 const Dashboard = () => {
 
@@ -11,12 +12,12 @@ const Dashboard = () => {
     { name: "TOP FB Budget", color: "#ffca3a",text:'#7f5e00', top: [] },
     { name: "Introductory number of sales", color: "#ff5400",text:'#ffffba', top: [] }
   ])
-
+const[isLoading , setIsLoading] = useState(true)
   const get = async () => {
     try {
       const { data } = await axiosInstance.get('/dashboard/')
   
-
+      
    
       const topCpl = data.sort((data1: any, data2: any) => data2.cpl - data1.cpl).slice(0, 3).map((item: any) => ({ name: item.name, value: item.cpl }));
       const topFb = data.sort((data1: any, data2: any) => data2.fb_budget - data1.fb_budget).slice(0, 3).map((item: any) => ({ name: item.name, value: item.fb_budget }));
@@ -31,6 +32,9 @@ const Dashboard = () => {
         return updatedList;
       });
 
+      if(data){
+        setIsLoading(false)
+      }
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +46,15 @@ const Dashboard = () => {
 
 
   return (
+    <>
+{  isLoading  ?
+    <div className='w-full h-[90vh]'>
+      <Laoding bg={'white'}
+    color ={'#322a57'}
+    width={'160px'}
+    height={'160px'}/>
+    </div>
+   :
     <div className='
       w-full h-[98vh] border-2 border-black flex flex-row flex-wrap justify-center gap-5 p-2
       sm:flex-col sm:gap-3 sm:p-1 sm:items-center
@@ -65,6 +78,7 @@ const Dashboard = () => {
         })
       }
     </div>
+     }</>
   )
 }
 
