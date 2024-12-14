@@ -15,14 +15,16 @@ height:string
 
    <div
       style={{ backgroundColor: bg }} // Inline style for dynamic bg color
-      className="min-h-screen flex items-center justify-center"
+      className="h-[100%] w-full flex items-center justify-center"
     >
       <div
         style={{
           borderColor: `#febf03`, // Inline style for dynamic border color
           borderTopColor: color, // Inline style for dynamic border-top color
+          height:height,
+          width:width
         }}
-        className={`w-16 h-16 border-8 rounded-full animate-spin`}
+        className={` h border-8 rounded-full animate-spin`}
       ></div>
     </div>
   )

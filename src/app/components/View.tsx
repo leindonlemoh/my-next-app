@@ -15,6 +15,7 @@ const View = () => {
     // states
   const [studioData, setStudioData] = useState<any[]>([]);
   const [toggleModal,setToggleModal] = useState(false)
+const[totalChurn,setTotalChurn]=useState('')
   const [studioPerformances, setStudioPerformances] = useState<any[]>([]);
   const [newPerformances, setNewPerformances] = useState({
     filter_type:'',
@@ -44,9 +45,9 @@ const View = () => {
 setIsLaoding(false)
 
         try{
-            const response = await axiosInstance.get(`/performance/${Id}`);
-            if(response){
-                setStudioPerformances(response.data)
+            const {data} = await axiosInstance.get(`/performance/${Id}`);
+            if(data){
+                setStudioPerformances(data)
 
                 setIsLaoding(false)
             }
@@ -62,8 +63,37 @@ console.error('Error fetching data:', error);
 
     fetchData();
 console.log(Id)
+
   }, [Id]);
-console.log(studioPerformances)
+  useEffect(() => {
+ const allPaused =  studioPerformances.map((item: any) => ({ paused: item.paused_members }))
+ const allAverageMembers =  studioPerformances.map((item: any) => ({ average: item.average_members }))
+console.log(allAverageMembers)
+ let totalPausedValue = 0;
+ let totalAverageValue = 0;
+
+ for(let paused of allPaused){
+  totalPausedValue += parseInt(paused.paused)   
+ }
+
+ for(let averageMem of allAverageMembers){
+
+  totalAverageValue += parseInt(averageMem.average)
+
+ }
+  if (totalAverageValue > 0) {
+    const get = (totalPausedValue / totalAverageValue) * 100
+    const percentage = (get).toFixed(2) 
+    setTotalChurn(percentage)
+
+  } else {
+    setTotalChurn('0');  
+  }
+  }, [studioPerformances,totalChurn])
+  
+const getChurn=()=>{
+
+}
   return (
     <div className='  '>
       {isLoading ? 
@@ -98,7 +128,7 @@ height={'16'}/>:
         lg:w-[30%]
         w-[30%] h-[100%] mt-5' 
         >
-        <StudioData studioData={studioData}/>
+        <StudioData studioData={studioData} churn={totalChurn}/>
         </div>
         
           <div 

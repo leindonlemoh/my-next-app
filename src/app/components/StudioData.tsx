@@ -2,9 +2,11 @@ import React from 'react'
 
 const StudioData = (
     {
-        studioData
+        studioData,
+        churn
     }:{
         studioData?:any
+        churn:any
         }) => {
             return (
                 <div className='border-2 border-[black] rounded-xl '>
@@ -38,7 +40,8 @@ const StudioData = (
                                     md:text-base
                                     ">
                                     Currency Symbol: {items?.currency_symbol} <br />
-                                    Status: {items?.status == 1 ? 'Active' :(items?.status == 0 ? 'Not Active' : 'Paused')}
+                                    Status: {items?.status == 1 ? 'Active' :(items?.status == 0 ? 'Not Active' : 'Paused')} <br />
+                                    Churn: {churn}%
                                     </p>
                                 </div>
                         </div>  )

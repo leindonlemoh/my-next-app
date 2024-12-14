@@ -18,7 +18,7 @@ const NavBar = ({
     return (
     <div className='
 
-    h-[50px] w-full bg-[#03045e] text-white  flex  justify-center items-center'>
+    h-[80px] w-full bg-[#03045e] text-white  flex  justify-center items-center'>
         <div className=' w-full m-1 p-[5px]'>
             <ol className='
             sm:gap-[20px]

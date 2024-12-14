@@ -20,9 +20,6 @@ const Modal = ({
 }) => {
 
 
-useEffect(()=>{
-console.log(content)
-},[content])
 
 const addPerformance  = (e:any)=>{
       e.preventDefault();

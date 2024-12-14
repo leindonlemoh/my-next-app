@@ -22,8 +22,8 @@ const urlParams = new URLSearchParams(window.location.search);
 
   const get = async () => {
     try {
-      const response = await axiosInstance.get('/studios');
-      const filteredData = response.data.filter((studio: Studio) => !studio.deleted_at || studio.deleted_at === '');
+      const {data}= await axiosInstance.get('/studios');
+      const filteredData = data.filter((studio: Studio) => !studio.deleted_at || studio.deleted_at === null);
       setStudioList(filteredData);
       setIsLoading(false);
     } catch (error) {

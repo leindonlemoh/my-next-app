@@ -8,7 +8,7 @@ const ViewPerformance = ({
         return (
         <>
          {studioPerformances.map((items:any, index:number)=>{
-
+            const churn = items?.paused_members/items?.average_members
              return(
              <div className=" w-full flex flex-col my-2 bg-white shadow-sm border border-slate-200 rounded-lg z-0" key={index}>
                 <div className="p-4">
@@ -33,7 +33,9 @@ const ViewPerformance = ({
                         <span className="font-bold">CPL:</span> {items?.cpl ? items?.cpl : 'N/A'}<br />
                         <span className="font-bold">FB AD LEAD:</span> {items?.fb_ad_lead ? items?.fb_ad_lead : 'N/A'}<br />
                         <span className="font-bold">FB Budget:</span> {items?.fb_budget ? items?.fb_budget : 'N/A'}<br />
+                        <span className="font-bold">Average Members:</span> {items?.average_members ? items?.average_members : 'N/A'}<br />
                         <span className="font-bold">Paused Members:</span> {items?.paused_members ? items?.paused_members : 'N/A'}<br />
+                        <span className="font-bold">Churn:</span> {churn}<br />
                         <span className="font-bold">Rollover:</span> {items?.rollover_mem_sold ? items?.rollover_mem_sold : 'N/A'}
                     </div>
 
